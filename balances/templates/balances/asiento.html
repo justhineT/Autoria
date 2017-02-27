@@ -17,18 +17,18 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>Nombre de cuenta</th>
+                        <th>Descripción</th>
                         <th>Debe</th>
                         <th>Haber</th>
                       </tr>
                     </thead>
                     <tbody>
-                     {% if asiento %}
-                      {% for asiento in asiento %}
+                     {% if asientos %}
+                      {% for asientos in asientos %}
                         <tr>
-                          <td>{{ asiento.descripcion }}</td>
-                          <td>{{asiento.ctadebito}} <br> {{asiento.total}}</td>
-                          <td>{{asiento.ctacredito}} <br> {{asiento.total}}</td>
+                          <td>{{ asientos.descripcion }}</td>
+                          <td>{{asientos.ctadebito}} <br> {{asientos.total}}</td>
+                          <td>{{asientos.ctacredito}} <br> {{asientos.total}}</td>
                         </tr>
                      {% endfor %}
                       {% else %}
