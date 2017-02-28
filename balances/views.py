@@ -43,17 +43,25 @@ def asiento(request):
     }
     return HttpResponse(template.render(context))
 
-def cambioSaldo(request):
-    asiento = Asiento.objects.all().get(id=1)
-    asiento.ctadebito.saldo = F("saldo") - asiento.total
-    asiento.ctacredito.saldo = F("saldo") + asiento.total
-    asiento.ctadebito.save(update_fields=["saldo"])
-    asiento.ctacredito.save(update_fields=["saldo"])
+def comprobacion(request):
+    activo = Cuenta.objects.all().filter(tipocuenta='1')
+    totalActivo = list( Cuenta.objects.all().filter(tipocuenta='1'))
+    totalactivo=0
+    for totalActivo in totalActivo:
+        totalactivo = totalactivo + totalActivo.saldo
 
-    template = loader.get_template("balances/index.html")
-    #contexto = Context({'cuenta':cuenta})
+    pasivo = Cuenta.objects.all().exclude(tipocuenta='1')
+    totalPasivo = list( Cuenta.objects.all().exclude(tipocuenta='1'))
+    totalpasivo=0
+    for totalPasivo in totalPasivo:
+        totalpasivo = totalpasivo + totalPasivo.saldo
+    meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre', 'diciembre']
+    template = loader.get_template("balances/comprobacion.html")
     context = {
-        'cuenta': cuenta,
-
+        'activo': activo,
+        'pasivo': pasivo,
+        'meses': meses,
+        'totalactivo': totalactivo,
+        'totalpasivo': totalpasivo
     }
     return HttpResponse(template.render(context))

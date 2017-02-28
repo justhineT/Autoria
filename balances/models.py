@@ -101,6 +101,14 @@ class Comprobacion(models.Model):
         managed = False
         db_table = 'comprobacion'
 
+class tipocuenta(models.Model):
+    def __str__(self):
+        return self.descripcion
+    id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    descripcion = models.CharField(db_column='DESCRIPCION', max_length=25, blank=True, null=True)  # Field name made lowercase.
+    class Meta:
+        managed = False
+        db_table = 'tipocuenta'
 
 class Cuenta(models.Model):
     def __str__(self):
@@ -108,7 +116,7 @@ class Cuenta(models.Model):
     codigo = models.IntegerField(db_column='CODIGO', primary_key=True)  # Field name made lowercase.
     descripcion = models.CharField(db_column='DESCRIPCION', max_length=25, blank=True, null=True)  # Field name made lowercase.
     saldo = models.FloatField(db_column='SALDO', blank=True, null=True)  # Field name made lowercase.
-
+    tipocuenta = models.ForeignKey('tipoCuenta', models.DO_NOTHING, db_column='TIPOCUENTA', blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'cuenta'

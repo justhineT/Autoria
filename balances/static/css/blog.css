@@ -1,3 +1,7 @@
 tfoot{
   background-color: #ccc;
 }
+.comprobacion-header{
+  display: flex;
+  flex-direction: row;
+}
